@@ -1,4 +1,7 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
+using Phone_Book.Models;
+
 namespace Phone_Book
 {
 
@@ -7,7 +10,10 @@ namespace Phone_Book
         public static void Main(string[] args)
         {
             //connnection LocalDB/PhoneBook
-        }
-    }
 
+        }
+
+
+    }
 }
+

@@ -2,11 +2,11 @@
 
 namespace Phone_Book.Models
 {
-    internal class Contact
+     public class Contact
     {
-        public string name { get; set; }
-        public string email { get; set; }
-        public string phoneNumber { get; set; }
+        public required string name { get; set; }
+        public required string email { get; set; }
+        public required string phoneNumber { get; set; }
 
     }
 }
