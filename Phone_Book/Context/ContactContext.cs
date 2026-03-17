@@ -1,16 +1,17 @@
-﻿
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Phone_Book.Models;
 
-namespace Phone_Book.DbContext
+
+namespace Phone_Book.Context
 {
-    internal class MyDbContext 
+    internal class ContactContext : DbContext
     {
-        public DbSet<Contact> Contacts { get; set; }
+        public DbSet<Contact> contacts { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Server=(localdb)\\PhoneBook;Database=EFConsoleDemo;Trusted_Connection=True;");
         }
+
     }
 }
