@@ -24,6 +24,23 @@ namespace Phone_Book.Menus
                 case "Add a contact":
                     Controllers.ContactController.AddContact();
                     break;
+
+                case "Update an existing contact":
+                    
+                    break;
+
+                case "Delete a contact":
+                    
+                    break;
+
+                case "View all contacts":
+
+                    break;
+
+                case "Exit":
+                    Environment.Exit(0);
+                    break;
+              
             }
 
         }
