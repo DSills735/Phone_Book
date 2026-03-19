@@ -9,7 +9,7 @@ namespace Phone_Book
     {
         public static void Main(string[] args)
         {
-            //connnection LocalDB/PhoneBook
+            // add a main menu area. 
 
         }
 
