@@ -1,6 +1,5 @@
-﻿
-using Microsoft.EntityFrameworkCore;
-using Phone_Book.Models;
+﻿using Phone_Book.Menus;
+
 
 namespace Phone_Book
 {
@@ -10,6 +9,7 @@ namespace Phone_Book
         public static void Main(string[] args)
         {
             // add a main menu area. 
+            MainMenu.HomeScreen();
 
         }
 
