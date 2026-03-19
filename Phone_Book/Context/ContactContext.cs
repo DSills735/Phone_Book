@@ -10,7 +10,7 @@ namespace Phone_Book.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=(localdb)\\PhoneBook;Database=EFConsoleDemo;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer("Server=(localdb)\\PhoneBook");
         }
 
     }
