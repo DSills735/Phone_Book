@@ -1,4 +1,5 @@
-﻿using Phone_Book.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using Phone_Book.Context;
 using Phone_Book.Models;
 using Spectre.Console;
 
@@ -98,8 +99,8 @@ namespace Phone_Book.Controllers
             Contact contact = new Contact();
             using var db = new ContactContext();
             var contacts = db.contacts.ToList();
-            Visualizations.TableVisualizer tableVisualizer = new Visualizations.TableVisualizer();
-            tableVisualizer.DisplayContacts(contacts);
+            Services.ContactService contactService = new Services.ContactService();
+            contactService.DisplayContacts(contacts);
 
             if(menu)
             {
@@ -108,6 +109,20 @@ namespace Phone_Book.Controllers
                 Console.Clear();
                 Menus.MainMenu.HomeScreen();
             }
+        }
+        internal static void UpdateContactInformation()
+        {
+            var contact = new Contact();
+            ViewContacts(false);
+
+            string name = AnsiConsole.Ask<string>("\n[blue]What contact would you like to view? Please enter the name.[]");
+            using var db = new ContactContext();
+            var allContacts = db.contacts.ToList();
+
+            
+
+
+
         }
     }
 }

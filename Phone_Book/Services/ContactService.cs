@@ -1,13 +1,12 @@
 ﻿using Spectre.Console;
 
-namespace Phone_Book.Visualizations
+namespace Phone_Book.Services
 {
-    internal class TableVisualizer
+    internal class ContactService
     {
-
         internal void DisplayContacts(List<Models.Contact> contacts)
         {
-            var table = new Spectre.Console.Table();
+            var table = new Table();
             table.AddColumn("Name");
             table.AddColumn("Relationship");
             table.AddColumn("Email");
@@ -16,7 +15,7 @@ namespace Phone_Book.Visualizations
             {
                 table.AddRow(contact.name!, contact.relationship!, contact.email!, contact.phoneNumber!);
             }
-            Spectre.Console.AnsiConsole.Write(table);
+            AnsiConsole.Write(table);
         }
     }
 }
