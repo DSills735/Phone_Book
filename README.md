@@ -3,13 +3,16 @@ this will function as a working contact directory or phone book, for personal us
 
 **Tech used:** C#, Entity Framework
 
+I learned alot about EF and understand why it is used. The simplicity of using it is awesome. Seems very powerful! I am excited to use it more! I also used Regex for validation, which I have not in a long time. I love the simplicity and power it provides!
 
 
 ## Optimizations
 
-Nothing yet.
+In previous projects, I created 2 different table methods, one to print, and the other to return to a specific destination. I put some thought into how to use the same class for both. It finally dawned on me to just use a boolean statement, which works well. Though, it could possibly be something that is confusing if other developers were involved in the project. 
 
 
 ## Lessons Learned
 
-Will update further into project.
+I learned alot about regex and pattern recognition. As you can see, the email pattern is very extensive. It started as just making sure there was text before an @ symbol, then ensuring there was text, period, text after. The validation turned into what it is now after researching. From what I can tell, It is comprehensive. 
+
+
