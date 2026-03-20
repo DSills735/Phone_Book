@@ -34,7 +34,7 @@ namespace Phone_Book.Menus
                     break;
 
                 case "View all contacts":
-
+                    Controllers.ContactController.ViewContacts(true);
                     break;
 
                 case "Exit":

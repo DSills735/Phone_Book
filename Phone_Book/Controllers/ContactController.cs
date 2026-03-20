@@ -93,5 +93,21 @@ namespace Phone_Book.Controllers
                     break;
             }
         }
+        internal static void ViewContacts(bool menu)
+        {
+            Contact contact = new Contact();
+            using var db = new ContactContext();
+            var contacts = db.contacts.ToList();
+            Visualizations.TableVisualizer tableVisualizer = new Visualizations.TableVisualizer();
+            tableVisualizer.DisplayContacts(contacts);
+
+            if(menu)
+            {
+                Console.WriteLine("Press any key to return to the home screen...");
+                Console.ReadKey();
+                Console.Clear();
+                Menus.MainMenu.HomeScreen();
+            }
+        }
     }
 }
