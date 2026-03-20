@@ -110,18 +110,12 @@ namespace Phone_Book.Controllers
                 Menus.MainMenu.HomeScreen();
             }
         }
-        internal static void UpdateContactInformation()
+        internal static void UpdateContactInformation(Contact contact, string detail)
         {
-            var contact = new Contact();
-            ViewContacts(false);
-
-            string name = AnsiConsole.Ask<string>("\n[blue]What contact would you like to view? Please enter the name.[]");
             using var db = new ContactContext();
-            var allContacts = db.contacts.ToList();
-
-            
-
-
+            //TODO finish this.
+            db.Update(contact.detail);
+            db.SaveChanges();
 
         }
     }

@@ -17,5 +17,18 @@ namespace Phone_Book.Services
             }
             AnsiConsole.Write(table);
         }
+
+        internal static void UpdateContact()
+        {
+            Controllers.ContactController.ViewContacts(false);
+            var name = AnsiConsole.Ask<string>("Enter the name of the contact you want to change:");
+            var detail = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                    .Title("What do you want to change?")
+                    .AddChoices(new[] { "Name", "Relationship", "Email", "Phone Number" }));
+
+            //todo finish this
+
+        }
     }
 }
