@@ -8,7 +8,7 @@ namespace Phone_Book
     {
         public static void Main(string[] args)
         {
-            // add a main menu area. 
+            
             MainMenu.HomeScreen();
 
         }

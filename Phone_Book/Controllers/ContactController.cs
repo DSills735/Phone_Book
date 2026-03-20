@@ -2,8 +2,6 @@
 using Phone_Book.Models;
 using Spectre.Console;
 
-//TODO further testing and debugging.
-
 namespace Phone_Book.Controllers
 {
     internal class ContactController
@@ -13,21 +11,22 @@ namespace Phone_Book.Controllers
             var name = AnsiConsole.Ask<string>("[blue]Enter full contact name[/]\n");
             var rel = AnsiConsole.Ask<string>("[blue]Enter your relationship. Ex. Work, Family, friend...[/]\n");
             bool valid = false;
-            var email = AnsiConsole.Ask<string>("[blue]Enter their email[/]\n");
-
+            var email = "";
             while (!valid)
             {
-                valid = Validation.Validation.IsTheEmailValid(email);
-                email = AnsiConsole.Ask<string>("[blue]Enter their email[/]\n");
-            }
-            valid = false;
-            var phoneNumber = AnsiConsole.Ask<string>("[blue]Enter their phone number (Expected Format: (XXX)XXX-XXXX [/]\n");
-            while (!valid)
-
-            {
-               valid = Validation.Validation.IsThePhoneNumberValid(phoneNumber); 
-               phoneNumber = AnsiConsole.Ask<string>("[blue]Enter their phone number (Expected Format: (XXX)XXX-XXXX [/]\n");
+               email = AnsiConsole.Ask<string>("[blue]Enter their email[/]\n"); 
+               valid = Validation.Validation.IsTheEmailValid(email);
                 
+            }
+
+            valid = false;
+            var phoneNumber = "";
+            while (!valid)
+
+            {
+               phoneNumber = AnsiConsole.Ask<string>("[blue]Enter their phone number (Expected Format: (XXX)XXX-XXXX [/]\n");
+               valid = Validation.Validation.IsThePhoneNumberValid(phoneNumber); 
+               
             }
 
             using var db = new ContactContext();
@@ -39,6 +38,7 @@ namespace Phone_Book.Controllers
                 email = email,
                 phoneNumber = phoneNumber
             });
+            
             AnsiConsole.Status()
                          .Start("Saving contact...", ctx =>
                          {
@@ -55,7 +55,7 @@ namespace Phone_Book.Controllers
                 {
                     "Add another contact",
                     "Home Screen",
-                    "Future option",
+                    "Future option -- NOT FUNCTIONAL",
                     "Exit"
                 }));
 
@@ -72,7 +72,7 @@ namespace Phone_Book.Controllers
                     Menus.MainMenu.HomeScreen();
                     break;
 
-                case "blank":
+                case "Save for future menu option":
                     break;
 
                 case "Exit":
