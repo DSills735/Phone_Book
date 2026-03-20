@@ -8,15 +8,28 @@ namespace Phone_Book.Controllers
     {
         internal static void AddContact()
         {
-            var name = AnsiConsole.Ask<string>("[blue]Enter full contact name[/]\n");
-            var rel = AnsiConsole.Ask<string>("[blue]Enter your relationship. Ex. Work, Family, friend...[/]\n");
             bool valid = false;
+            var name = "";
+            while (!valid)
+            {
+                name = AnsiConsole.Ask<string>("[blue]Enter full contact name[/]\n");
+                valid = Validation.Validation.IsTheInputNull(name);
+            }
+            valid = false;
+            string rel = "";
+            while (!valid)
+            {
+                rel = AnsiConsole.Ask<string>("[blue]Enter your relationship. Ex. Work, Family, friend...[/]\n");
+                valid = Validation.Validation.IsTheInputNull(rel);
+            }
+
+            valid = false;
             var email = "";
             while (!valid)
             {
-               email = AnsiConsole.Ask<string>("[blue]Enter their email[/]\n"); 
-               valid = Validation.Validation.IsTheEmailValid(email);
-                
+                email = AnsiConsole.Ask<string>("[blue]Enter their email[/]\n");
+                valid = Validation.Validation.IsTheEmailValid(email);
+
             }
 
             valid = false;
@@ -24,9 +37,9 @@ namespace Phone_Book.Controllers
             while (!valid)
 
             {
-               phoneNumber = AnsiConsole.Ask<string>("[blue]Enter their phone number (Expected Format: (XXX)XXX-XXXX [/]\n");
-               valid = Validation.Validation.IsThePhoneNumberValid(phoneNumber); 
-               
+                phoneNumber = AnsiConsole.Ask<string>("[blue]Enter their phone number (Expected Format: (XXX)XXX-XXXX [/]\n");
+                valid = Validation.Validation.IsThePhoneNumberValid(phoneNumber);
+
             }
 
             using var db = new ContactContext();
@@ -38,7 +51,7 @@ namespace Phone_Book.Controllers
                 email = email,
                 phoneNumber = phoneNumber
             });
-            
+
             AnsiConsole.Status()
                          .Start("Saving contact...", ctx =>
                          {

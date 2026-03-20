@@ -43,5 +43,18 @@ namespace Phone_Book.Validation
             }
             
         }
+
+        internal static bool IsTheInputNull(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+            {
+                AnsiConsole.MarkupLine("[red] INVALID INPUT. Please enter a valid input.[/]");
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 }
