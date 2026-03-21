@@ -26,7 +26,7 @@ namespace Phone_Book.Menus
                     break;
 
                 case "Update an existing contact":
-                    Controllers.ContactController.UpdateContactInformation();
+                    Services.ContactService.UpdateContact();
                     break;
 
                 case "Delete a contact":
