@@ -1,12 +1,13 @@
 ﻿using Phone_Book.Controllers;
 using Phone_Book.Models;
 using Spectre.Console;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Phone_Book.Services
 {
     internal class ContactService
     {
-        internal void DisplayContacts(List<Models.Contact> contacts)
+        internal void DisplayContacts(List<Contact> contacts)
         {
             var table = new Table();
             table.AddColumn("Name");
@@ -37,13 +38,16 @@ namespace Phone_Book.Services
         internal static Contact GetContactInputList()
         {
             var contacts = ContactController.GetContacts();
-            var contactArray = contacts.Select(c => c.name).ToArray();
-            var contactName = AnsiConsole.Prompt(
-                new SelectionPrompt<string>()
-                    .Title("Select a contact:")
-                    .AddChoices(contactArray));
-            var id = contacts.Single(c => c.name == contactName)?.ContactID;
+            var contactArray = contacts.Select(x => x.name).ToArray();
+
+            var option = AnsiConsole.Prompt(new SelectionPrompt<string>()
+                .Title("Choose contact")
+                .AddChoices(contactArray));
+
+            var id = contacts.Single(x => x.name == option).ContactID;
+
             var contact = ContactController.GetContactByID(id);
+
             return contact;
         }
     }

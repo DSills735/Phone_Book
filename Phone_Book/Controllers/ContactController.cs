@@ -165,21 +165,12 @@ namespace Phone_Book.Controllers
             db.SaveChanges();
 
         }
-        internal static void GetContactByID(int id)
+        internal static Contact GetContactByID(int? id)
         {
             using var db = new ContactContext();
             var contact = db.contacts.SingleOrDefault(c => c.ContactID == id);
-            if (contact != null)
-            {
-                AnsiConsole.MarkupLine($"[blue]Name:[/] {contact.name}");
-                AnsiConsole.MarkupLine($"[blue]Relationship:[/] {contact.relationship}");
-                AnsiConsole.MarkupLine($"[blue]Email:[/] {contact.email}");
-                AnsiConsole.MarkupLine($"[blue]Phone Number:[/] {contact.phoneNumber}");
-            }
-            else
-            {
-                AnsiConsole.MarkupLine("[red]Contact not found.[/]");
-            }
+
+            return contact;
         }
         internal static List<Contact> GetContacts()
         {
@@ -189,5 +180,6 @@ namespace Phone_Book.Controllers
 
             return contacts;
         }
+        
     }
 }

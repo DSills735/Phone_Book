@@ -15,6 +15,7 @@ namespace Phone_Book.Menus
                     "Add a contact",
                     "Update an existing contact",
                     "Delete a contact",
+                    "View a single contact card",
                     "View all contacts",
                     "Exit"
                 }));
@@ -31,6 +32,10 @@ namespace Phone_Book.Menus
 
                 case "Delete a contact":
                     
+                    break;
+                case "View a single contact card":
+                    var contact = Services.ContactService.GetContactInputList();
+                    UserInterface.ShowProductCard(contact);
                     break;
 
                 case "View all contacts":
