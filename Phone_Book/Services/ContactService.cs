@@ -1,7 +1,7 @@
 ﻿using Phone_Book.Controllers;
 using Phone_Book.Models;
 using Spectre.Console;
-using System.Security.Cryptography.X509Certificates;
+
 
 namespace Phone_Book.Services
 {
@@ -28,13 +28,13 @@ namespace Phone_Book.Services
             switch (choice)
             {
                 case "Name":
-                    var name = AnsiConsole.Ask<string>("Enter the new name");
+                    var name = AnsiConsole.Ask<string>("[blue]Enter the new name[/]");
                     contact.name = name;
                     ContactController.UpdateContactInformation(contact);
                     break;
 
                 case "Relationship":
-                    var relationship = AnsiConsole.Ask<string>("Enter the new relationship");
+                    var relationship = AnsiConsole.Ask<string>("[blue]Enter the new relationship[/]");
                     contact.relationship = relationship;
                     ContactController.UpdateContactInformation(contact);
                     break;
@@ -44,7 +44,7 @@ namespace Phone_Book.Services
                     var email = "";
                     while (!valid)
                     {
-                        email = AnsiConsole.Ask<string>("Enter the new email");
+                        email = AnsiConsole.Ask<string>("[blue]Enter the new email[/]");
                         valid = Validation.Validation.IsTheEmailValid(email);
                     }
 
@@ -57,7 +57,7 @@ namespace Phone_Book.Services
                     valid = false;
                     while (!valid)
                     {
-                        phoneNumber = AnsiConsole.Ask<string>("Enter the new phone number (Expected Format: (XXX)XXX-XXXX)");
+                        phoneNumber = AnsiConsole.Ask<string>("[blue]Enter the new phone number (Expected Format: (XXX)XXX-XXXX)[/]");
                         valid = Validation.Validation.IsThePhoneNumberValid(phoneNumber);
                     }
                     contact.phoneNumber = phoneNumber;
