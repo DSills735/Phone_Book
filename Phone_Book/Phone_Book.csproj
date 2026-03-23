@@ -24,4 +24,8 @@
     <PackageReference Include="Spectre.Console" Version="0.54.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Phone_Book.UnitTesting\Phone_Book.UnitTesting.csproj" />
+  </ItemGroup>
+
 </Project>

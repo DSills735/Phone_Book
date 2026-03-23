@@ -71,7 +71,6 @@ namespace Phone_Book.Controllers
                 {
                     "Add another contact",
                     "Home Screen",
-                    "Future option -- NOT FUNCTIONAL",
                     "Exit"
                 }));
 
@@ -86,9 +85,6 @@ namespace Phone_Book.Controllers
                 case "Home Screen":
                     Console.Clear();
                     Menus.MainMenu.HomeScreen();
-                    break;
-
-                case "Save for future menu option":
                     break;
 
                 case "Exit":
