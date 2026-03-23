@@ -1,4 +1,5 @@
 ﻿using Phone_Book.Controllers;
+using Phone_Book.Menus;
 using Phone_Book.Models;
 using Spectre.Console;
 
@@ -90,15 +91,23 @@ namespace Phone_Book.Services
         internal static void GetRelationshipInputList()
         {
             var contacts = ContactController.GetContacts();
-            var relationshipArray = contacts.Select(x => x.relationship).ToArray();
-            var option = AnsiConsole.Prompt(new SelectionPrompt<string>()
-                .Title("Choose relationship")
-                .AddChoices(relationshipArray));
+            var uniqueRelationship = contacts
+                .Select(x => x.relationship)
+                .Distinct()
+                .OrderBy(r => r)
+                .ToList();
 
-            var id = contacts.Single(x => x.relationship == option).ContactID;
-            var contact = ContactController.GetContactByID(id);
+            var chosenRelationship = AnsiConsole.Prompt(
+        new SelectionPrompt<string>()
+            .Title("Select a [green]relationship[/] category:")
+            .PageSize(10)
+            .AddChoices(uniqueRelationship));
 
-            Menus.UserInterface.ShowContactCard(contact);
+            var filteredContacts = contacts
+        .Where(x => x.relationship == chosenRelationship)
+        .ToList();
+
+            UserInterface.DisplayContacts(filteredContacts);
 
         }
 
