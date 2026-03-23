@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Phone_Book.Context;
+using Phone_Book.Menus;
 using Phone_Book.Models;
+using Phone_Book.Services;
 using Spectre.Console;
 
 namespace Phone_Book.Controllers
@@ -99,8 +101,8 @@ namespace Phone_Book.Controllers
             Contact contact = new Contact();
             using var db = new ContactContext();
             var contacts = db.contacts.ToList();
-            Services.ContactService contactService = new Services.ContactService();
-            contactService.DisplayContacts(contacts);
+            UserInterface.DisplayContacts(contacts);
+            
 
             if(menu)
             {
@@ -110,59 +112,13 @@ namespace Phone_Book.Controllers
                 Menus.MainMenu.HomeScreen();
             }
         }
-        internal static void UpdateContactInformation(string info, string detail)
+        internal static void UpdateContactInformation(Contact contact)
         {
             using var db = new ContactContext();
-            Contact contact = new Contact();
-            
-
-            switch (detail)
-            {
-                case "Name":
-                    var name = AnsiConsole.Ask<string>("[blue]Enter the new name[/]\n");
-                    if (name != null)
-                    {
-                        db.Update(contact.name = name);
-                    }
-                    break;
-
-                case "Relationship":
-                    var rel = AnsiConsole.Ask<string>("[blue]Enter your relationship with this contact[/]\n");
-                    if (rel != null)
-                    {
-                        db.Update(contact.relationship = rel);
-                    }
-                    break;
-
-                case "Phone Number":
-                    bool valid = false;
-                    var num = "";
-                    while (!valid)
-                    {
-                        num = AnsiConsole.Ask<string>("[blue]Enter the new phone number. Format: (xxx)xxx-xxxx [/]\n");
-                        if (num != null)
-                        {
-                            db.Update(contact.phoneNumber = num);
-                        }
-                    }
-
-                    break;
-                case "Email":
-                    var email = "";
-                    valid = false;
-
-                    while (!valid)
-                    {
-                        email = AnsiConsole.Ask<string>("[blue]Enter the new name[/]\n");
-                        if (email != null)
-                        {
-                            db.Update(contact.name = email);
-                        }
-                    }
-                    break;
-            }
-
+            db.Update(contact);
             db.SaveChanges();
+            Console.Clear();
+            ContactService.UpdateContact();
 
         }
         internal static Contact GetContactByID(int? id)
@@ -170,7 +126,7 @@ namespace Phone_Book.Controllers
             using var db = new ContactContext();
             var contact = db.contacts.SingleOrDefault(c => c.ContactID == id);
 
-            return contact;
+            return contact!;
         }
         internal static List<Contact> GetContacts()
         {

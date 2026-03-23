@@ -7,34 +7,70 @@ namespace Phone_Book.Services
 {
     internal class ContactService
     {
-        internal void DisplayContacts(List<Contact> contacts)
-        {
-            var table = new Table();
-            table.AddColumn("Name");
-            table.AddColumn("Relationship");
-            table.AddColumn("Email");
-            table.AddColumn("Phone Number");
-            foreach (var contact in contacts)
-            {
-                table.AddRow(contact.name!, contact.relationship!, contact.email!, contact.phoneNumber!);
-            }
-            AnsiConsole.Write(table);
-        }
+        
 
         internal static void UpdateContact()
         {
-            Controllers.ContactController.ViewContacts(false);
-            var name = AnsiConsole.Ask<string>("Enter the name of the contact you want to change:");
-
-            var detail = AnsiConsole.Prompt(
+            var contact = GetContactInputList();
+            
+            var choice = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
-                    .Title("What do you want to change?")
-                    .AddChoices(new[] { "Name", "Relationship", "Email", "Phone Number" }));
+                .Title("What do you want to update?")
+                .AddChoices(new[]
+                {
+                    "Name",
+                    "Relationship",
+                    "Email",
+                    "Phone Number",
+                    "Exit to menu"
+                }));
 
-            Controllers.ContactController.UpdateContactInformation(name, detail);
+            switch (choice)
+            {
+                case "Name":
+                    var name = AnsiConsole.Ask<string>("Enter the new name");
+                    contact.name = name;
+                    ContactController.UpdateContactInformation(contact);
+                    break;
 
+                case "Relationship":
+                    var relationship = AnsiConsole.Ask<string>("Enter the new relationship");
+                    contact.relationship = relationship;
+                    ContactController.UpdateContactInformation(contact);
+                    break;
+
+                case "Email":
+                    bool valid = false;
+                    var email = "";
+                    while (!valid)
+                    {
+                        email = AnsiConsole.Ask<string>("Enter the new email");
+                        valid = Validation.Validation.IsTheEmailValid(email);
+                    }
+
+                    contact.email = email;
+                    ContactController.UpdateContactInformation(contact);
+                    break;
+
+                case "Phone Number":
+                    var phoneNumber = "";
+                    valid = false;
+                    while (!valid)
+                    {
+                        phoneNumber = AnsiConsole.Ask<string>("Enter the new phone number (Expected Format: (XXX)XXX-XXXX)");
+                        valid = Validation.Validation.IsThePhoneNumberValid(phoneNumber);
+                    }
+                    contact.phoneNumber = phoneNumber;
+                    ContactController.UpdateContactInformation(contact);
+                    break;
+
+                case "Exit to menu":
+                    Console.Clear();
+                    Menus.MainMenu.HomeScreen();
+                    break;
+            }
         }
-        //TODO debug and finish
+        
         internal static Contact GetContactInputList()
         {
             var contacts = ContactController.GetContacts();
