@@ -6,7 +6,7 @@ namespace Phone_Book.Menus
 {
     internal class UserInterface
     {
-        internal static void ShowProductCard(Contact contact)
+        internal static void ShowContactCard(Contact contact)
         {
             //dont fix this formatting, it is intentional
             var panel = new Panel($@"Name: {contact.name}

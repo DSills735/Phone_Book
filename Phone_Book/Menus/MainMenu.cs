@@ -1,4 +1,5 @@
 ﻿
+using Phone_Book.Services;
 using Spectre.Console;
 
 namespace Phone_Book.Menus
@@ -17,6 +18,7 @@ namespace Phone_Book.Menus
                     "Delete a contact",
                     "View a single contact card",
                     "View all contacts",
+                    "View contacts by relationship",
                     "Exit"
                 }));
 
@@ -31,11 +33,14 @@ namespace Phone_Book.Menus
                     break;
 
                 case "Delete a contact":
-                    
+                    ContactService.DeleteContact();
                     break;
                 case "View a single contact card":
                     var contact = Services.ContactService.GetContactInputList();
-                    UserInterface.ShowProductCard(contact);
+                    UserInterface.ShowContactCard(contact);
+                    break;
+                case "View contacts by relationship":
+                    Services.ContactService.GetRelationshipInputList();
                     break;
 
                 case "View all contacts":

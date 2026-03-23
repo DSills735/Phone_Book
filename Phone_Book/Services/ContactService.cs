@@ -7,12 +7,12 @@ namespace Phone_Book.Services
 {
     internal class ContactService
     {
-        
+
 
         internal static void UpdateContact()
         {
             var contact = GetContactInputList();
-            
+
             var choice = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                 .Title("What do you want to update?")
@@ -70,7 +70,7 @@ namespace Phone_Book.Services
                     break;
             }
         }
-        
+
         internal static Contact GetContactInputList()
         {
             var contacts = ContactController.GetContacts();
@@ -85,6 +85,53 @@ namespace Phone_Book.Services
             var contact = ContactController.GetContactByID(id);
 
             return contact;
+        }
+
+        internal static void GetRelationshipInputList()
+        {
+            var contacts = ContactController.GetContacts();
+            var relationshipArray = contacts.Select(x => x.relationship).ToArray();
+            var option = AnsiConsole.Prompt(new SelectionPrompt<string>()
+                .Title("Choose relationship")
+                .AddChoices(relationshipArray));
+
+            var id = contacts.Single(x => x.relationship == option).ContactID;
+            var contact = ContactController.GetContactByID(id);
+
+            Menus.UserInterface.ShowContactCard(contact);
+
+        }
+
+        internal static void DeleteContact()
+        {
+            var contact = GetContactInputList();
+            ContactController.DeleteContact(contact);
+            AnsiConsole.MarkupLine("[green]Contact successfully deleted[/]");
+            var choice = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+
+                    .Title("What next?")
+                    .AddChoices(new[]
+                    {
+                         "Delete another contact",
+                         "Home Screen",
+                         "Exit"
+                    }));
+            switch (choice)
+            {
+                case "Delete another contact":
+                    Console.Clear();
+                    DeleteContact();
+                    break;
+                case "Home Screen":
+                    Console.Clear();
+                    Menus.MainMenu.HomeScreen();
+                    break;
+
+                case "Exit":
+                    Environment.Exit(0);
+                    break;
+            }
         }
     }
 }

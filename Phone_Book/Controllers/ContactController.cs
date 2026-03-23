@@ -136,6 +136,20 @@ namespace Phone_Book.Controllers
 
             return contacts;
         }
-        
+
+        internal static List<string> GetRelationships()
+        {
+            using var db = new ContactContext();
+            var relationships = db.contacts.Select(c => c.relationship).Distinct().ToList();
+
+            return relationships;
+        }
+
+        internal static void DeleteContact(Contact contact)
+        {
+            using var db = new ContactContext();
+            db.contacts.Remove(contact);
+            db.SaveChanges();
+        }
     }
 }
