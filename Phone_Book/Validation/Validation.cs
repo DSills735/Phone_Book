@@ -1,16 +1,15 @@
 ﻿
 using Spectre.Console;
-using System.Net.Mail;
 using System.Text.RegularExpressions;
 
 namespace Phone_Book.Validation
 {
-    internal class Validation
+    public class Validation
     {
 
-        internal static bool IsThePhoneNumberValid(string phoneNumber)
+        public static bool IsThePhoneNumberValid(string phoneNumber)
         {
-            string pattern = @"\(\d{3}\)\d{3}-\d{4}";
+            string pattern = @"^\(\d{3}\)\d{3}-\d{4}";
 
             if (Regex.IsMatch(phoneNumber, pattern))
             {
@@ -25,7 +24,7 @@ namespace Phone_Book.Validation
 
         }
 
-        internal static bool IsTheEmailValid(string email)
+        public static bool IsTheEmailValid(string email)
         {
             
             string pattern = @"^[\w!#$%&'*+\-/=?\^_`{|}~]+(\.[\w!#$%&'*+\-/=?\^_`{|}~]+)*"
